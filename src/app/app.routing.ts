@@ -14,7 +14,9 @@ const appRoutes:Routes = [
   {path:'register', component:RegisterComponent},
   {path: 'home', component: HomeComponent},
   {path: 'user-edit', component: UserEditComponent},
-  {path: 'users', component: UserComponent}
+  {path: 'people/:page', component: UserComponent},
+  {path: 'people', component: UserComponent},
+  {path: '**', component:HomeComponent}
 ];
 
 export const appRoutingProviders: any[] = [];

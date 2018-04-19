@@ -24,15 +24,19 @@ import { GLOBAL } from './global';
           formData.append(fileName,files[i], files[i].name);
         }
         xhr.onreadystatechange = function(){
+          console.log(xhr.readyState);
+          console.log(xhr.status);
           if(xhr.readyState == 4){
             if(xhr.status == 200){
               resolve(JSON.parse(xhr.response));
+            } else {
+              console.log('Siempre fui yo el error');
+              reject(xhr.response);
+              console.log('wait a little dude');
             }
-          }else{
-            reject(xhr.response);
           }
         }
-        xhr.open('POST',url, true);
+        xhr.open('POST',url,true);
         xhr.setRequestHeader('Authorization',token);
         xhr.send(formData);
         //console.log('Y salgo D:');

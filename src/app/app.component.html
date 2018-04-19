@@ -13,14 +13,14 @@
         <li><a [routerLink]="['home']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
         <li><a [routerLink]="['home']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-list-alt"></span> Timeline</a></li>
         <li><a [routerLink]="['home']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-envelope"></span>  Mensajes</a></li>
-        <li><a [routerLink]="['users']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-user"></span>  Personas</a></li>
+        <li><a [routerLink]="['people']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-user"></span>  Personas</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" *ngIf="identity">
-        <li class="avatar">
-          <img *ngIf="identity.image" src="{{url+'get-image-user/'+identity.image}}"/>
-        </li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{identity.name}} {{identity.surname}}<span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img *ngIf="identity.image" class="avatar" width="50" height="50"src="{{url+'get-image-user/'+identity.image}}"/>
+            {{identity.name}} {{identity.surname}}<span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li><a href=""><span class="glyphicon glyphicon-user"></span>   Mi perfil</a></li>
             <li><a [routerLink]="['user-edit']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-cog"></span>   Editar</a></li>

@@ -27,12 +27,13 @@ export class RegisterComponent implements OnInit{
   }
   onSubmit(form){
     if(this.user.nickname=="") this.user.nickname=this.user.name;
+    this.user.image = 'default.png';
     console.log(this.user);
     this._userService.register(this.user).
       subscribe(
         response=>{
           if(response.user && response.user._id){
-            //console.log(response.user);
+            console.log(response.user);
             this.status = "success";
             form.reset();
             this._router.navigate(['login']);

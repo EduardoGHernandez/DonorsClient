@@ -21,6 +21,10 @@
         No olvides la contraseña!
       </label>
     </p>
+    <p>
+      <label>¿Aun no tienes cuenta?</label><a [routerLink]="['/register']">  Registrate aqui! </a>
+
+
     <input type="submit"  value="Siguiente" class="btn btn-success" [disabled]="!loginForm.form.valid"/>
   </form>
 </div>

@@ -1,0 +1,18 @@
+.image-user{
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.item-user .user-name a{
+  color:black;
+  font-weight: bold;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 30%;
+    border-radius: 10px;
+    margin-right: 5px;
+}

@@ -37,36 +37,38 @@ export class UserEditComponent implements OnInit{
 
   }
 
-  onSubmit(){
-    //console.log(this.user);
+  onSubmit( ){
     this._userService.updateUser(this.user).subscribe(
       response =>{
         //console.log(response);
         if(!response){
           this.status='error';
+          console.log('Here, dude');
         } else{
           this.status='success';
           localStorage.setItem('identity', JSON.stringify(this.user));
           this.identity = this.user;
           //Subir imagen de usuario
-          //console.log('Hasta aqui vamos bien');
-          this._uploadService.makeFileRequest(this._userService.url+'upload-image-user/'+this.user._id,[],this.filesToUpload, this.token,'image')
-            .then((result:any)=>{
-              console.log('Aqui imprimi algo');
-              console.log(result);
-              this.user.image = result.user.image;
-              localStorage.setItem('identity', JSON.stringify(this.user));
-              this.identity = this.user;
-            });
-            this.user = this._userService.getIdentity();
-            localStorage.setItem('identity', JSON.stringify(this.user));
-            this.identity = this.user;
-          //console.log('Al fin todo bien :D');
+          if(this.filesToUpload){
+            this._uploadService.makeFileRequest(this.url+'upload-image-user/'+this.user._id,[],this.filesToUpload,this.token,'image')
+              .then((result:any)=>{
+                console.log('Supuesto result');
+                console.log(result);
+                this.user.image = result.user.image;
+                localStorage.setItem('identity',JSON.stringify(this.user));
+              }).catch(error => {
+                this.status = 'error';
+                console.log('la cagaste');
+              });
+            //console.log('Hasta aqui vamos bien');
+            //console.log('Al fin todo bien :D');
+          }
         }
       },
       error => {
         var errorMessage = <any> error;
         console.log(errorMessage);
+        console.log('Se me chispoteo');
         if(errorMessage!=null){
           this.status = 'error';
         }
@@ -75,6 +77,8 @@ export class UserEditComponent implements OnInit{
   }
 
   fileChangeEvent(fileInput:any ){
-    this.filesToUpload = <Array<File>> fileInput.target.files;
+    //console.log(fileInput);
+    this.filesToUpload = <Array<File>>(fileInput.target.files);
+    console.log(this.filesToUpload);
   }
 }
