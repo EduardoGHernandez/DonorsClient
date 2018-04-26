@@ -1,28 +1,40 @@
-<nav class="navbar navbar-inverse">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Delius+Unicase" />
+<!-- Nav bar -->
+<nav class="navbar myNav">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+    <div class="navbar-header myHeader">
+      <!--When nav collapse you only can see this-->
+      <button type="button" class="navbar-toggle"  data-toggle="collapse" data-target="#DonumNavbar">
+        <span class="glyphicon glyphicon-menu-hamburger" style="font-size:20px;color:white; line-height:50px"></span>
       </button>
-      <a class="navbar-brand" href="#">{{title}}  <span class="glyphicon glyphicon-heart-empty"></span></a>
+      <span class="title-nav">
+        <span><img src="{{url+'get-icon/computer.png'}}" width="50px" height="50px"/></span>
+        <a  [routerLink]="['home']"  [routerLinkActive]="['active']">{{title}}</a>
+      </span>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
+    <!--This part can collapse-->
+    <div class="collapse navbar-collapse myHeader" id="DonumNavbar">
       <ul class="nav navbar-nav"  *ngIf="identity">
-        <li><a [routerLink]="['home']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+        <li><a [routerLink]="['home']"  [routerLinkActive]="['active']" ><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
         <li><a [routerLink]="['home']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-list-alt"></span> Timeline</a></li>
-        <li><a [routerLink]="['home']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-envelope"></span>  Mensajes</a></li>
         <li><a [routerLink]="['people']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-user"></span>  Personas</a></li>
+        <li><a [routerLink]="['campaigns']" [routerLinkActive]="['active']"><span class="glyphicon glyphicon-gift"></span>  Comienza a Donar </a></li>
       </ul>
+      <ul class="nav navbar-nav" *ngIf="!identity">
+        <li><a href="#about">¿Que es Donum?</a></li>
+        <li><a href="#services">¿Que hacemos?</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+      <!--Right alignment-->
       <ul class="nav navbar-nav navbar-right" *ngIf="identity">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <img *ngIf="identity.image" class="avatar" width="50" height="50"src="{{url+'get-image-user/'+identity.image}}"/>
+            <img *ngIf="identity.image" class="circle-img" width="70px" height="70px"src="{{url+'get-image-user/'+identity.image}}"/>
             {{identity.name}} {{identity.surname}}<span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
             <li><a href=""><span class="glyphicon glyphicon-user"></span>   Mi perfil</a></li>
+            <li><a [routerLink]="['home']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-envelope"></span>  Mensajes</a></li>
             <li><a [routerLink]="['user-edit']"  [routerLinkActive]="['active']"><span class="glyphicon glyphicon-cog"></span>   Editar</a></li>
             <li><a class="pointer" (click)="logout()"><span class="glyphicon glyphicon-log-out"></span>   Cerrar sesion</a></li>
           </ul>
@@ -35,4 +47,91 @@
     </div>
   </div>
 </nav>
+<!--Component-->
 <router-outlet></router-outlet>
+<!-- New campaign form and button -->
+<div *ngIf="identity && (this._route.snapshot._routerState['url']!='/user-edit')" >
+  <div   class="campaign-btn" data-toggle="modal" data-target="#myModal">
+    <p class="plus">+
+    </p>
+  </div>
+  <div class="modal fade" id="myModal" role="dialog">
+
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Solicitar donadores</h4>
+          <div class="alert alert-info" *ngIf="newCampaignForm.touched && (!name.valid)">
+
+          </div>
+        </div>
+        <div class="modal-body">
+          <form #newCampaignForm="ngForm" (ngSubmit)="onSubmit(newCampaignForm)">
+            <p>
+              <label>Nombre Completo de quien recibira la donación</label>
+              <input type="text" name="name" #name="ngModel" [(ngModel)]="campaign.name" class="form-control" required/>
+              <span *ngIf="!name.valid && name.touched"> El nombre no puede ser un campo vacio</span>
+            </p>
+            <p>
+              <label>Edad:
+                <input type="number" name="age" #age="ngModel" [(ngModel)]="campaign.age" min="1" max="100"/>
+              </label>
+            </p>
+            <p>
+              <label> Ciudad: </label>
+              <select class="form-control" name="city" #city="ngModel" [(ngModel)]="campaign.city">
+                <option *ngFor="let city of cities">{{city}}</option>
+              </select>
+            </p>
+            <p>
+              <label>¿Cuando termina la campaña?</label>
+               <input type="date" class="form-control" name="date" #date="ngModel" [(ngModel)]="campaign.expire_date" />
+            </p>
+            <p>
+              <label> ¿Que tipo sanguineo necesitas? </label>
+              <select name="blood" #blood="ngModel" [(ngModel)]="campaign.blood_type">
+                <option *ngFor="let type of blood_type">{{type}}</option>
+              </select>
+            </p>
+            <p>
+              <label>¿Con quien podemos contactarnos?</label>
+              <input type="text" class="form-control" name="contact" #contact="ngModel" [(ngModel)]="campaign.contact_name"/>
+            </p>
+            <p>
+              <label> Num. telefonico</label>
+              <input type="tel" name="phone" #phone="ngModel" [(ngModel)]="campaign.phone" class="form-control"/>
+            </p>
+            <p>
+              <label>Selecciona un hospital</label>
+              <select name="hospital" #hospital="ngModel" [(ngModel)]="campaign.hospital">
+                <option *ngFor="let hospital of hospitals">{{hospital}}</option>
+              </select>
+            </p>
+            <p class="form-inline">
+              <label>Cama:</label>
+              <input type="text" name="bed" #bed="ngModel" [(ngModel)]="campaign.bed"/>
+              <label>Habitación:</label>
+              <input type="text" name="room" #room="ngModel" [(ngModel)]="campaign.room"/>
+            </p>
+            <p>
+              <label> ¿Cuantos donadores necesitas? </label>
+              <input type="number" name="num_donators" #num_donators="ngModel" [(ngModel)]="campaign.num_donators"/>
+            </p>
+            <p>
+              <input type="file"/>
+            </p>
+            <div class="modal-footer">
+              <div class="btn-group" style="float:right">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar  <span class="glyphicon glyphicon-trash"></span></button>
+                <button type="submit" class="btn btn-success" [disabled]="!newCampaignForm.valid">Enviar  <span class="glyphicon glyphicon-send"></span></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

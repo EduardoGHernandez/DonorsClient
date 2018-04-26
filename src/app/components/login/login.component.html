@@ -6,6 +6,11 @@
   <div class=" alert alert-danger" *ngIf="status=='error'">
     Tu cuenta o contraseña son incorrectos
   </div>
+  <button class="button-btn fb">
+        <a href="#">
+          <span class="glyphicon glyphicon-"></span>Inicia sesion con Facebook
+         </a>
+  </button>
   <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
     <p>
       <label>Correo electronico: </label>

@@ -1,0 +1,25 @@
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a href="#">Ciudad</a>
+  <a href="#">Hospital</a>
+  <a href="#">Fecha</a>
+</div>
+<div class="col-lg-12 text-center">
+<form class="form-inline">
+    <div class="input-group">
+      <input type="text" class="form-control card" size="50" placeholder="Buscar..." >
+      <div class="input-group-btn">
+        <button type="button" class="btn card" (click)="openNav()" style="background-color:#757575"><span class="glyphicon glyphicon-cog" style="color:white;"></span></button>
+      </div>
+    </div>
+</form>
+</div>
+<div class="col-lg-12" style="margin-top:10px" id="main">
+  <div class="col-lg-3 campaign text-center" *ngFor="let campaign of campaigns">
+    <img src="{{url+'get-image-user/'+ campaign.image}}" class="image-campaign" width="150" height="150"/>
+    <h3><a [routerLink] = "['/campaign',campaign._id]" class="campaign-name">{{campaign.name}}</a></h3>
+  </div>
+</div>
+<script>
+
+</script>

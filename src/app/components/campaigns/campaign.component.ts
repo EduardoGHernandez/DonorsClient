@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import {User} from '../../models/user';
-import {UserService} from '../../services/user.service';
+import {Campaign} from '../../models/campaign';
+import {CampaignService} from '../../services/campaign.service';
 import {GLOBAL} from '../../services/global';
 
 @Component({
-  selector:'user',
-  templateUrl: 'user.component.html',
-  styleUrls: ['user.component.css'],
-  providers : [UserService]
+  selector:'campaign',
+  templateUrl: 'campaign.component.html',
+  styleUrls: ['campaign.component.css'],
+  providers : [CampaignService]
 })
 
-export class UserComponent implements OnInit{
+export class CampaignComponent implements OnInit{
   public title:string;
   public identity;
   public token;
@@ -21,21 +21,20 @@ export class UserComponent implements OnInit{
   public status : string;
   public total;
   public pages;
-  public users :User[];
+  public campaigns :Campaign[];
   public url;
   constructor(
     private _route:ActivatedRoute,
     private _router:Router,
-    private _userService: UserService
+    private _campaignService: CampaignService
   ){
     this.url = GLOBAL.url;
-    this.title = 'Usuario';
-    this.identity = this._userService.getIdentity();
-    this.token = this._userService.getToken();
+    this.title = 'Solicitudes de donación';
   }
 
   ngOnInit(){
     this.actualPage();
+    console.log('Campañas');
   }
 
   actualPage(){
@@ -55,22 +54,23 @@ export class UserComponent implements OnInit{
         }
       }
       //Obtener ususarios
-      this.getUsers(page);
+      this.getCampaigns(page);
     });
   }
 
-  getUsers(page){
-    this._userService.getUsers(page).subscribe(
+  getCampaigns(page){
+    this._campaignService.getCampaigns(page).subscribe(
     response =>{
-      if(!response.users){
+      if(!response.campaigns){
         this.status='error';
+        console.log('Error campañas');
       } else {
         //console.log(response);
         this.total = response.total;
         this.pages = response.pages;
-        this.users = response.users;
+        this.campaigns = response.campaigns;
         if(page > this.pages){
-          this._router.navigate(['people',1]);
+          this._router.navigate(['campaigns',1]);
         }
       }
 
@@ -87,5 +87,17 @@ export class UserComponent implements OnInit{
   topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+  }
+  
+  openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+      document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+  }
+
+  closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+      document.body.style.backgroundColor = "white";
   }
 }

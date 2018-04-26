@@ -1,3 +1,73 @@
-.navbar{
-  border-radius: 0px;
+/*Navbar styles*/
+.myNav{
+  border: 0;
+  border-radius: 0;
+  background-color: #3F51B5;
+  width: 100%;
+}
+.myNav .navbar-brand a li{
+    color: white;
+}
+.myNav .navbar-nav a li{
+    color: white;
+}
+.title-nav a{
+  font-size: 30px;
+  color:white;
+  font-family: "Delius Unicase";
+  line-height: 70px;
+}
+.myHeader a{
+  font-family: "Delius Unicase";
+  color: white;
+}
+
+.navbar-nav li a{
+  line-height: 60px;
+}
+.dropdown-menu li a{
+  color:black;
+}
+@media (max-width: 700px) {
+  .navbar-nav li a{
+    line-height: 10px;
+  }
+  .dropdown-menu li a{
+    color:white;
+  }
+}
+ /*FLoating button*/
+ .campaign-btn{
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #E64A19;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px #666;
+  color : white;
+ }
+ .campaign-btn:hover{
+  background: #FF5722;
+ }
+
+ .plus{
+  color: white;
+  position: absolute;
+  top: 0;
+  display: block;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  line-height: 55px;
+  font-size: 38px;
+  font-family: 'Roboto';
+  font-weight: 300;
+  animation: plus-out 0.3s;
+  transition: all 0.3s;
 }

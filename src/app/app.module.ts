@@ -11,6 +11,7 @@ import {RegisterComponent} from './components/register/register.component';
 import {HomeComponent} from './components/home/home.component';
 import {UserEditComponent} from './components/user-edit/user-edit.component';
 import {UserComponent} from './components/user/user.component';
+import {CampaignComponent} from './components/campaigns/campaign.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {UserComponent} from './components/user/user.component';
     RegisterComponent,
     HomeComponent,
     UserEditComponent,
-    UserComponent
+    UserComponent,
+    CampaignComponent
   ],
   imports: [
     BrowserModule,

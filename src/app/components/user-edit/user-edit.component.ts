@@ -37,7 +37,7 @@ export class UserEditComponent implements OnInit{
 
   }
 
-  onSubmit( ){
+  onSubmit(){
     this._userService.updateUser(this.user).subscribe(
       response =>{
         //console.log(response);

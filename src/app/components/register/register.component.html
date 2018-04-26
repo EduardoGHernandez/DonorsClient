@@ -6,6 +6,11 @@
   <div class=" alert alert-danger" *ngIf="status=='error'">
     Error en el registro, puede que esta cuenta de correo ya esta siendo usada. <a [routerLink]="['/login']">Recuperar contraseña </a>
   </div>
+  <button class="button-btn fb">
+        <a href="#">
+          <span class="glyphicon glyphicon-"></span>Registrate con Facebook
+         </a>
+  </button>
   <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
     <p>
       <label>Nombre</label>

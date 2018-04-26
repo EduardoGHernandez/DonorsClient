@@ -7,8 +7,11 @@ import {RegisterComponent} from './components/register/register.component';
 import {HomeComponent} from './components/home/home.component';
 import {UserEditComponent} from './components/user-edit/user-edit.component';
 import {UserComponent} from './components/user/user.component';
+import {CampaignComponent} from './components/campaigns/campaign.component';
 
 const appRoutes:Routes = [
+  {path: 'campaigns', component: CampaignComponent},
+  {path: 'campaigns/:page', component: CampaignComponent},
   {path:'', component: HomeComponent},
   {path:'login', component: LoginComponent},
   {path:'register', component:RegisterComponent},
