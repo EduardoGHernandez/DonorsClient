@@ -7,7 +7,7 @@
 }
 .bgimg-1 {
     position: 0 0;
-    background-image: url('http://localhost:3800/api/get-icon/bg1.jpg');
+    background-image: url('https://morning-lowlands-75402.herokuapp.com/api/get-icon/bg1.jpg');
 }
 
 .bg1-text {
