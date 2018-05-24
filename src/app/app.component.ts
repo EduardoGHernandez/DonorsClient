@@ -53,9 +53,10 @@ export class AppComponent implements OnInit, DoCheck{
     this._campaignService.register(this.campaign).
       subscribe(
         response=>{
-          if(response.campaign && response.campaign._id){
+          if(response ){
             this.status = "success";
-            //this._router.navigate(['login']);
+            console.log("Recarga");
+            window.location.reload();
           }else{
             this.status="error";
           }
@@ -64,7 +65,7 @@ export class AppComponent implements OnInit, DoCheck{
           console.log(error);
     });
     console.log('Algo hace');
-    this._router.navigate(['campaigns']);
+
   }
 
   newCampaign(){

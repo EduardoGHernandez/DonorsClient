@@ -50,7 +50,7 @@
 <!--Component-->
 <router-outlet></router-outlet>
 <!-- New campaign form and button -->
-<div *ngIf="identity && (this._route.snapshot._routerState['url']!='/user-edit')" >
+<div *ngIf="identity && this._route.snapshot._routerState['url']!='/user-edit'" >
   <div   class="campaign-btn" data-toggle="modal" data-target="#myModal">
     <p class="plus">+
     </p>
@@ -125,7 +125,7 @@
             <div class="modal-footer">
               <div class="btn-group" style="float:right">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar  <span class="glyphicon glyphicon-trash"></span></button>
-                <button type="submit" class="btn btn-success" [disabled]="!newCampaignForm.valid">Enviar  <span class="glyphicon glyphicon-send"></span></button>
+                <button type="submit" class="btn btn-success" [disabled]="!newCampaignForm.valid" alert-success="modal">Enviar  <span class="glyphicon glyphicon-send"></span></button>
               </div>
             </div>
           </form>

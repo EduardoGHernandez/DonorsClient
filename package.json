@@ -22,11 +22,12 @@
     "@angular/platform-browser": "5.2.9",
     "@angular/platform-browser-dynamic": "5.2.9",
     "@angular/router": "5.2.9",
-    "core-js": "^2.4.1",
-    "rxjs": "^5.5.8",
-    "zone.js": "^0.8.25",
     "bootstrap": "3.3.7",
-    "jquery": "1.12"
+    "core-js": "^2.4.1",
+    "express": "^4.16.3",
+    "jquery": "1.12",
+    "rxjs": "^5.5.8",
+    "zone.js": "^0.8.25"
   },
   "devDependencies": {
     "@angular/cli": "^1.7.4",

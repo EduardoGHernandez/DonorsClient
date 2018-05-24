@@ -17,7 +17,16 @@
 <div class="col-lg-12" style="margin-top:10px" id="main">
   <div class="col-lg-3 campaign text-center" *ngFor="let campaign of campaigns">
     <img src="{{url+'get-image-user/'+ campaign.image}}" class="image-campaign" width="150" height="150"/>
-    <h3><a [routerLink] = "['/campaign',campaign._id]" class="campaign-name">{{campaign.name}}</a></h3>
+    <h3><a [routerLink] = "['/campaign',campaign._id]" class="campaign-name">
+      {{campaign.name}}
+    </a></h3>
+    <ul>
+      <li>{{ campaign.age}} años</li>
+      <li>{{ campaign.city}}, {{campaign.state}}</li>
+      <li>{{campaign.hospital}}</li>
+      <li>Tipo sanguineo: {{ campaign.blood_type}}</li>
+      <li>Tel.: {{ campaign.phone}}</li>
+    </ul>
   </div>
 </div>
 <script>
